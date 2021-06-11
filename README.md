@@ -1,7 +1,8 @@
 # Prova 3
 Última avaliação da matéria de Projeto Integrador III
 ## Integrantes:
-Altair Correia
+
+Altair Correia de Azevedo
 
 Arthur Souza
 
