@@ -1,15 +1,5 @@
 """
 Ciência da Computação - 3º Semestre
-1. Terceira verificação de aprendizagem (projeto).
-2. Instruções do desenvolvimento do projeto para avaliação:
-- Fazer em grupo de até cinco pessoas, mas a apresentação será individual.
-- Prazo: enviar dia 16/06/20 até 16h.
-- Apresentação: dia 17/06/20 no Google Meet no horário da aula.
-- Coloque o nome de todos os alunos do grupo dentro de cada programa ‘.py’
-- Apenas um aluno do grupo deve enviar o projeto pela atividade do Classroom em um arquivo
-“.zip” (aluno1_aluno2_aluno3_aluno4.zip) com todos os arquivos desenvolvidos:
-Um arquivo projeto1 “.py”; e
-Um arquivo projeto2 “.py”.
 3. Projeto 1 (POO):
 Elabore o enunciado de um problema que será resolvido com POO, herança e classe abstrata.
 O projeto deve ter no mínimo:
