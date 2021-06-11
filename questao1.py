@@ -31,11 +31,11 @@ class User(ABC):
     def Login(self):
         pass
 class Paciente(User):
-    def __init__(self,login,senha,nome,exame=[],endereco=None):
+    def __init__(self,login,senha,nome,endereco=None):
         self.login=login
         self.senha=senha
         self.nome=nome
-        self.exame=List
+        self.exame=list()
         self.endereco=endereco
     def __str__(self):
         s=f"Cliente: {self.nome}\nLogin:{self.login}\nEndereço atual: {self.endereco}"
@@ -62,8 +62,10 @@ class Paciente(User):
         tipo = input("Tipo do Exame: ")
         data = input("Insira a data(aaaa-mm-dd): ")
         medico = input("Insira o nome Médico: ")
-        marcado.append((tipo,data,medico))
-        #self.exame.append(marcado)
+        marcado.append(tipo)
+        marcado.append(data)
+        marcado.append(medico)
+        self.exame.append(marcado)
         
         
     def get_nome(self):
