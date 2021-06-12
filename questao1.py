@@ -70,8 +70,8 @@ class Paciente(User):
         return self.endereco
     def set_endereco(self,new):
         self.endereco = new
-    def get_exames(self):
-        return self.exames
+    def get_exame(self):
+        return self.exame
     def set_nome(self,new):
         self.nome = new
     def marcar_exame(self):
@@ -154,9 +154,34 @@ class Medico(Paciente):
             print("Número de tentativas excedido, encerrando sessão\n")
             log=False
             return log
+    def get_nome(self):
+        return self.nome
+    def get_crm(self):
+        return self.login
+    def num_consultas(self,pac):
+        con=Paciente.get_exame(pac)
+        search=0
+        found=[]
+        while True:
+            if search in con:
+                found=[con[search]]
+                con.pop[search]
+            else:
+                if search==(len(con)+1):
+                    break
+                else:
+                    search+=1
+        print(f"Consultas marcadas com o paciente {Paciente.get_nome(pac)}: {search-1}")
+        i=0
+        while i < len(found):
+            print("Tipo de exame:",found[i][0])
+            print("\nData do exame:",found[i][1])
+            i+=1
 if __name__ == "__main__":
     #Login do CLIENTE é o CPF
     #Login do MEDICO é o CRM
     c1=Paciente(12345678912,112233,"João Azevedo","apt 404, Edifício Araucárias, QR410, Brasilia, DF")
     m1=Medico(45678,122456,"Carlos Almeida","Pediatra")
-    Medico.Login(m1)
+    c1.marcar_exame()
+    c1.marcar_exame()
+    m1.num_consultas(c1)
