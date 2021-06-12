@@ -1,6 +1,6 @@
 """
 Ciência da Computação - 3º Semestre
-<<<<<<< .merge_file_a12704
+
 1. Terceira verificação de aprendizagem (projeto).
 2. Instruções do desenvolvimento do projeto para avaliação:
 - Fazer em grupo de até cinco pessoas, mas a apresentação será individual.
@@ -11,9 +11,6 @@ Ciência da Computação - 3º Semestre
 “.zip” (aluno1_aluno2_aluno3_aluno4.zip) com todos os arquivos desenvolvidos:
 Um arquivo projeto1 “.py”; e
 Um arquivo projeto2 “.py”.
-
-=======
->>>>>>> .merge_file_a10740
 3. Projeto 1 (POO):
 Elabore o enunciado de um problema que será resolvido com POO, herança e classe abstrata.
 O projeto deve ter no mínimo:
