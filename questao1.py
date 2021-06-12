@@ -24,15 +24,19 @@ O projeto deve ter no mínimo:
 - Listas
 """
 from abc import ABC, abstractmethod
+from typing import List
 class User(ABC):
     @abstractmethod
     def Login(self):
         pass
 class Paciente(User):
-    def __init__(self,login,senha,nome,endereco=None,exame=[]):
+    def __init__(self,login,senha,nome,endereco=None):
         self.login=login
         self.senha=senha
         self.nome=nome
+        self.exame=list()
+        self.idade=list()
+        self.sexo=list()
         self.endereco=endereco
     def __str__(self):
         s=f"Cliente: {self.nome}\nLogin:{self.login}\nEndereço atual: {self.endereco}"
@@ -52,6 +56,26 @@ class Paciente(User):
         else:
             print("\nDado Inválido, tente novamente\n")
             return False
+    def marcar_exame(self):
+        print(f"Olá, {self.nome}")
+        print("Painel De Marcação de Exame")
+        marcado = []
+        tipo = input("Tipo do Exame: ")
+        data = input("Insira a data(aaaa-mm-dd): ")
+        medico = input("Insira o nome Médico: ")
+        marcado.append(tipo)
+        marcado.append(data)
+        marcado.append(medico)
+        self.exame.append(marcado)
+    def idade_Sexo_Paciente(self):
+        idadeLista = []
+        sexoLista = []
+        idadeUsuario= input(f"Insira a sua Idade: ")
+        sexoUsuario= input(f"Insira o seu Sexo: ")
+        idadeLista.append(idadeUsuario)
+        sexoLista.append(sexoUsuario)
+        self.idade.append(idadeLista)
+        self.sexo.append(sexoLista)
     def get_nome(self):
         return self.nome
     def get_endereco(self):
@@ -83,6 +107,8 @@ if __name__ == "__main__":
     #Login do CLIENTE é o CPF
     #Login do MEDICO é o CRM
     c1=Paciente(12345678912,112233,"João Azevedo","apt 404, Edifício Araucárias, QR410, Brasilia, DF")
-    a=input("Login: ")
-    b=input("Senha: ")
-    Paciente.Login(c1,a,b)
+    #a=input("Login: ")
+    #b=input("Senha: ")
+    #Paciente.Login(c1,a,b)
+    c1.marcar_exame()
+    c1.idade_Sexo_Paciente()
