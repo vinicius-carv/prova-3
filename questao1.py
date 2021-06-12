@@ -40,28 +40,38 @@ class Paciente(User):
     def __str__(self):
         s=f"Cliente: {self.nome}\nLogin:{self.login}\nEndereço atual: {self.endereco}"
         return s
-    def Login(self,login,senha):
-        log=False
-        print(self.login,"\n")
-        if self.login==login:
-            if self.senha==senha:
+    def Login(self):
+        tentativa=0
+        while tentativa<=3:
+            login=str(input("Digite o seu CPF: "))
+            if len(login)>11 or len(login)<11 or len(login)==0:
+                print("CPF inválido")
+                tentativa+=1
+                continue
+            senha=str(input("Digite a sua senha: "))
+            if len(senha)==0:
+                print("Senha inválida")
+                tentativa+=1
+                continue
+            if str(self.login)==str(login) and str(self.senha)==str(senha):
                 log=True
+                print("\nLogin realizado com sucesso\n")
+                return log
             else:
-                log=False
+                print("\nDado Inválido, tente novamente\n")
+                tentativa+=1 
         else:
+            print("Número de tentativas excedido, encerrando sessão\n")
             log=False
-        if log==True:
-            print("\nLogin realizado com sucesso\n")
-            return True
-        else:
-            print("\nDado Inválido, tente novamente\n")
-            return False    
+            return log
     def get_nome(self):
         return self.nome
     def get_endereco(self):
         return self.endereco
     def set_endereco(self,new):
         self.endereco = new
+    def get_exames(self):
+        return self.exames
     def set_nome(self,new):
         self.nome = new
     def marcar_exame(self):
@@ -116,31 +126,37 @@ class Paciente(User):
                 break
             else:
                 print("Opção inválida")
-class Medico(User):
-    def __init__(self,login,senha,nome):
-        self.login=login
-        self.senha=senha
-        self.nome=nome
-    def Login(self,login,senha):
-        log=False
-        if self.login==login and self.senha==senha:
-            log=True
+class Medico(Paciente):
+    def __init__(self,login,senha,nome,especialidade):
+        super().__init__(login,senha,nome)
+        self.especialidade = especialidade
+    def Login(self):
+        tentativa=0
+        while tentativa<=3:
+            login=str(input("Digite o seu CRM: "))
+            if len(login)==0:
+                print("CRM inválido")
+                tentativa+=1
+                continue
+            senha=str(input("Digite a sua senha: "))
+            if len(senha)==0:
+                print("Senha inválida")
+                tentativa+=1
+                continue
+            if str(self.login)==str(login) and str(self.senha)==str(senha):
+                log=True
+                print("\nLogin realizado com sucesso\n")
+                return log
+            else:
+                print("\nDado Inválido, tente novamente\n")
+                tentativa+=1 
         else:
+            print("Número de tentativas excedido, encerrando sessão\n")
             log=False
-        if log==True:
-            print("\nLogin realizado com sucesso\n")
-            return True
-        else:
-            print("\nDado Inválido, tente novamente\n")
-            return False
+            return log
 if __name__ == "__main__":
     #Login do CLIENTE é o CPF
     #Login do MEDICO é o CRM
     c1=Paciente(12345678912,112233,"João Azevedo","apt 404, Edifício Araucárias, QR410, Brasilia, DF")
-    #a=input("Login: ")
-    #b=input("Senha: ")
-    #Paciente.Login(c1,a,b)
-    c1.marcar_exame()
-    c1.marcar_exame()
-    c1.ver_exame()
-    c1.remarcar_exame()
+    m1=Medico(45678,122456,"Carlos Almeida","Pediatra")
+    Medico.Login(m1)
