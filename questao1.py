@@ -40,7 +40,7 @@ class Paciente(User):
         self.registros=registros
         self.log=False
     def __str__(self):
-        s=f"Cliente: {self.nome}\nLogin:{self.login}\nEndereço atual: {self.endereco}"
+        s=f"Informações do paciente: {self.nome}\nLogin:{self.login}\nEndereço atual: {self.endereco}"
         return s
     def Login(self): #1
         tentativa=0
@@ -82,6 +82,8 @@ class Paciente(User):
             print("Login não realizado")
     def get_nome(self):
         return self.nome
+    def get_log(self):
+        return self.log
     def get_endereco(self):
         return self.endereco
     def set_endereco(self,new):
@@ -100,16 +102,19 @@ class Paciente(User):
         self.registros+=1
     def ver_exame(self): #4
         i=0
-        print(f"Histórico de exames do paciente {self.nome}:")
-        while i<self.registros:
-            print("\n--------------------------------")
-            print(f"Exame nº{i+1}")
-            print("Tipo de exame:",self.exame[i][0])
-            print("\nData do exame:",self.exame[i][1])
-            print("\nMédico responsável pelo exame:",self.exame[i][2])
-            print("\n--------------------------------")
-            i+=1
-        print("\n")
+        if len(self.exame)>0:
+            print(f"Histórico de exames do paciente {self.nome}:")
+            while i<self.registros:
+                print("\n--------------------------------")
+                print(f"Exame nº{i+1}")
+                print("Tipo de exame:",self.exame[i][0])
+                print("\nData do exame:",self.exame[i][1])
+                print("\nMédico responsável pelo exame:",self.exame[i][2])
+                print("\n--------------------------------")
+                i+=1
+            print("\n")
+        else:
+            print("Nenhum exame marcado")
     def cancelar_exame(self): #5
         Paciente.ver_exame(self)
         op=int(input("Selecione, da lista, o nº do exame que deseja remover:\n"))
@@ -238,7 +243,52 @@ class Medico(Paciente):
 if __name__ == "__main__":
     #Login do CLIENTE é o CPF
     #Login do MEDICO é o CRM
-    c1=Paciente(12345678912,112233,"João Azevedo","apt 404, Edifício Araucárias, QR410, Brasilia, DF")
+    p1=Paciente(12345678912,112233,"João Azevedo","apt 404, Edifício Araucárias, QR410, Brasilia, DF")
     m1=Medico(45678,122456,"Carlos Almeida","Pediatra")
-    c2=m1.registra_paciente()
-    c2.Login()
+    while True:
+        print("Bem-vindo ao sistema do Hospital Público de Brasília\nDigite [0] em qualquer um dos menus para encerrar a sessão\n")
+        inicio=int(input("Você é um:\n[1]Paciente\n[2]Médico\n"))
+        if inicio==1:
+            login=Paciente.Login(p1)
+            while login==True:
+                menu=int(input("Selecione uma das opções:\n[1] - Ver histórico de exames\n[2] - Marcar exame\n[3] - Cancelar exame\n[4] - Remarcar exame\n[0] - Fazer logout\n"))
+                if menu==1:
+                    p1.ver_exame()
+                    continue
+                elif menu==2:
+                    p1.marcar_exame()
+                    continue
+                elif menu==3:
+                    p1.cancelar_exame()
+                    continue
+                elif menu==4:
+                    p1.remarcar_exame()
+                    continue
+                elif menu==0:
+                    p1.logout()
+                    break
+                else:
+                    print("Opção inválida")
+            else:
+                continue
+        elif inicio==2:
+            login=Medico.Login(m1)
+            while login==True:
+                menu=int(input("Selecione uma das opções:\n[1] - Ver consultas com um determinado paciente\n[2] - Marcar exame\n[3] - Cadastrar paciente\n[0] - Fazer logout\n"))
+                if menu==1:
+                    m1.num_consultas(p1)
+                elif menu==2:
+                    print(f"Agendando exame para {p1.get_nome()}\n")
+                    p1.marcar_exame()
+                elif menu==3:
+                    c2=m1.registra_paciente()
+                elif menu==0:
+                    m1.logout()
+                    break
+                else:
+                    print("Opção inválida")
+        elif inicio==0:
+            print("Sessão encerrada")
+            break
+        else:
+            print("Opção inválida")
