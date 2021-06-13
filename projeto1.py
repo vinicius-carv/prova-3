@@ -1,7 +1,7 @@
 """
 Curso: Ciência da Computação
 Semestre: 3º Semestre
-Disciplina: Projeto Integrador 3
+Disciplina: Projeto Integrador III
 Alunos: Altair Correia de Azevedo
         Arthur Souza Maciel da Silva
         Felipe Ferreira Lima e Lima
