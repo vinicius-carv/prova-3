@@ -1,10 +1,25 @@
 """
-4. Projeto 2 (Python e SQL):
+Curso: Ciência da Computação
+Semestre: 3º Semestre
+Disciplina: Projeto Integrador 3
+Alunos: Altair Correia de Azevedo
+        Arthur Souza Maciel da Silva
+        Felipe Ferreira Lima e Lima
+        Gustavo Gomes de Jesus
+        Vinícius Alves de Carvalho
+
+
+                                TERCEIRA VERIFICAÇÃO DE APRENDIZAGEM
+
+
+PROJETO 2 (Python e SQL)
+
 - Crie a base de dados;                     -> OK
 - Crie pelo menos uma tabela;               ->OK
 - Um menu com as opções de CRUD com a tabela criada;
 - Use SQL com parâmetros.
 """
+
 import mysql.connector
 from mysql.connector import connect, Error
 
@@ -46,8 +61,7 @@ def inserir():
     i_preco = input("Preço do remédio: ")
     i_desc = input("Descrição do remédio: ")
     i_presc = input("Prescrição do remédio: ")
-    i_validade = input("Data de Validade(aaaa-mm-dd): ")
-    
+    i_validade = input("Data de Validade(aaaa-mm-dd): ")    
     valores = (i_remedio,i_preco,i_desc,i_presc,i_validade)
     cursor.execute(sql, valores)
     conexao.commit()
@@ -74,7 +88,6 @@ def atualiza_dados(cod):
         WHERE codigo = %s """
     i_remedio = input("Nome do remédio: ")
     i_preco = input("Preço do remédio: ")
-
     valores = (i_remedio, i_preco, cod)
     cursor.execute(sql,valores)
     conexao.commit()
