@@ -27,9 +27,9 @@ O projeto deve ter no mínimo:
 - Listas OK
 """
 
-from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod # Importar função abstrata
 import random
-class User(ABC):
+class User(ABC): # Classe abstrata
     @abstractmethod
     def Login(self):
         pass
@@ -44,11 +44,11 @@ class Paciente(User):
         self.registros=registros
         self.log=False
 
-    def __str__(self):
+    def __str__(self): # Método sobrescrito
         s=f"Informações do paciente: {self.nome}\nLogin:{self.login}\nEndereço atual: {self.endereco}"
         return s
 
-    def Login(self): #1
+    def Login(self): #1 Função herdada da classe abstrata (User)
         tentativa=0
         while tentativa<=3:
             login=str(input("Digite o seu CPF: "))
@@ -148,7 +148,7 @@ class Paciente(User):
                 print("Opção inválida")
 
     def remarcar_exame(self): #6
-        Paciente.ver_exame(self)
+        Paciente.ver_exame(self) # Chama a método já declarado para mostrar todos os exames do paciente atual
         op=int(input("Selecione, da lista, o nº do exame que deseja remarcar:\n"))
         confirm=self.exame[op-1]
         while True:
@@ -167,7 +167,7 @@ class Paciente(User):
 
 class Medico(Paciente):
     def __init__(self,login,senha,nome,especialidade):
-        super().__init__(login,senha,nome)
+        super().__init__(login,senha,nome) # Herdando o construtor da classe PACIENTE
         self.especialidade = especialidade
         self.log=False
 
@@ -218,14 +218,14 @@ class Medico(Paciente):
         return self.login
 
     def num_consultas(self,pac):
-        #O objetivo da função é retornar o número de consultas que um paciente já realizou ou irá realizar com um determinado médico
-        con=Paciente.get_exame(pac) #Armazena a lista de exames de um paciente em uma variável local
-        search=0 #Contador
-        found=[] #Lista para dos exames que pertencem ao médico em questão, feito para printar a lista de todos os exames
+        # O objetivo da função é retornar o número de consultas que um paciente já realizou ou irá realizar com um determinado médico
+        con=Paciente.get_exame(pac) # Armazena a lista de exames de um paciente em uma variável local
+        search=0 # Contador
+        found=[] # Lista para dos exames que pertencem ao médico em questão, feito para printar a lista de todos os exames
         while True:
             if search in con:
                 found.append(con[search])
-                con.pop[search]
+                con.pop(search)
             else:
                 if search==(len(con)+1):
                     break
