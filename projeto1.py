@@ -27,9 +27,9 @@ O projeto deve ter no mínimo:
 - Listas OK
 """
 
-from abc import ABC, abstractmethod # Importar função abstrata
+from abc import ABC, abstractmethod
 import random
-class User(ABC): # Classe abstrata
+class User(ABC):
     @abstractmethod
     def Login(self):
         pass
@@ -44,11 +44,11 @@ class Paciente(User):
         self.registros=registros
         self.log=False
 
-    def __str__(self): # Método sobrescrito
+    def __str__(self):
         s=f"Informações do paciente: {self.nome}\nLogin:{self.login}\nEndereço atual: {self.endereco}"
         return s
 
-    def Login(self): #1 Função herdada da classe abstrata (User)
+    def Login(self): #1
         tentativa=0
         while tentativa<=3:
             login=str(input("Digite o seu CPF: "))
@@ -151,7 +151,7 @@ class Paciente(User):
                 print("Opção inválida")
 
     def remarcar_exame(self): #6
-        Paciente.ver_exame(self) # Chama a método já declarado para mostrar todos os exames do paciente atual
+        Paciente.ver_exame(self) 
         op=int(input("Selecione, da lista, o nº do exame que deseja remarcar:\n"))
         confirm=self.exame[op-1]
         while True:
@@ -170,7 +170,7 @@ class Paciente(User):
 
 class Medico(Paciente):
     def __init__(self,login,senha,nome,especialidade):
-        super().__init__(login,senha,nome) # Herdando o construtor da classe PACIENTE
+        super().__init__(login,senha,nome) 
         self.especialidade = especialidade
         self.log=False
 
@@ -223,7 +223,7 @@ class Medico(Paciente):
     def num_consultas(self,pac):
         # O objetivo da função é retornar o número de consultas que um paciente já realizou ou irá realizar com um determinado médico
         print(f"\n{Paciente.get_exame(pac)}\n")
-        con=list(Paciente.get_exame(pac)) # Armazena a lista de exames de um paciente em uma variável local
+        con=list(Paciente.get_exame(pac))
         search=i=0
         for i in range(pac.get_registro()):
             if self.nome in con[i]:
@@ -248,16 +248,16 @@ class Medico(Paciente):
             if len(end)==0:
                 print("Endereço inválido")
                 continue
-            presenha=[] # Armazena os números randômicos como elementos de uma lista
+            presenha=[]
             for i in range(6):
                 if i==6:
                     break
                 a=random.randint(0,9)
                 presenha.append(a)
                 i+=1
-                conversor = [str(presenha) for presenha in presenha] # Converter lista de int para lista str
-                converter = "".join(conversor) # Lista de str em uma única str
-                senha = int(converter) # Converte a str para int
+                conversor = [str(presenha) for presenha in presenha] 
+                converter = "".join(conversor) 
+                senha = int(converter) 
             print(f"Informe a seguinte senha para o seu paciente e peça-o para guardar-la com segurança\nSenha: {senha}")
             return Paciente(cpf,senha,name,end)
 
