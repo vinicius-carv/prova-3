@@ -266,8 +266,8 @@ class Medico(Paciente):
             return Paciente(cpf,senha,name,end)
 
 if __name__ == "__main__":
-    #Login do CLIENTE é o CPF
-    #Login do MEDICO é o CRM
+    # Para logar como PACIENTE use o CPF e a SENHA na linha 271
+    #Para logar como MÉDICO use o CRM e a SENHA na linha 272
     p1=Paciente(12345678912,112233,"João Azevedo","apt 404, Edifício Araucárias, QR410, Brasilia, DF")
     m1=Medico(45678,122456,"Carlos Almeida","Pediatra")
     while True:
