@@ -35,14 +35,14 @@ class User(ABC): # Classe abstrata
         pass
 
 class Paciente(User):
-    def __init__(self,login,senha,nome,endereco=None,registros=0):
+    def __init__(self,login,senha,nome,endereco=None,registros=0): # Método Construtor é onde todos atributos da classe são declarados
         self.login=login
         self.senha=senha
         self.nome=nome
         self.exame=list()
         self.endereco=endereco
         self.registros=registros
-        self.log=False
+        self.log=False #Conferir se está logado
 
     def __str__(self): # Método sobrescrito
         s=f"Informações do paciente: {self.nome}\nLogin:{self.login}\nEndereço atual: {self.endereco}"
@@ -139,7 +139,7 @@ class Paciente(User):
         op=int(input("Selecione, da lista, o nº do exame que deseja remover:\n"))
         confirm=self.exame[op-1]
         while True:
-            confmesg=input(f"Deseja cancelar {confirm}?\n[Y]/[N]\n").upper()
+            confmesg=input(f"Deseja cancelar {confirm}?\n[Y]/[N]\n").upper() #Mensagem de confirmação
             if confmesg=="Y":
                 self.exame.pop(op-1)
                 print("Operação concluída")
@@ -151,7 +151,7 @@ class Paciente(User):
                 print("Opção inválida")
 
     def remarcar_exame(self): #6
-        Paciente.ver_exame(self) # Chama a método já declarado para mostrar todos os exames do paciente atual
+        Paciente.ver_exame(self) # Chama a método ver exame já declarado na classe paciente para mostrar todos os exames do paciente atual
         op=int(input("Selecione, da lista, o nº do exame que deseja remarcar:\n"))
         confirm=self.exame[op-1]
         while True:
@@ -170,7 +170,7 @@ class Paciente(User):
 
 class Medico(Paciente):
     def __init__(self,login,senha,nome,especialidade):
-        super().__init__(login,senha,nome) # Herdando o construtor da classe PACIENTE
+        super().__init__(login,senha,nome) # Herdando login, senha e nome do construtor da classe PACIENTE
         self.especialidade = especialidade
         self.log=False
 
