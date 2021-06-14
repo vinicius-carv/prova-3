@@ -103,6 +103,9 @@ class Paciente(User):
     def get_exame(self):
         return self.exame
 
+    def get_registro(self):
+        return self.registros
+
     def set_nome(self,new):
         self.nome = new
 
@@ -219,24 +222,17 @@ class Medico(Paciente):
 
     def num_consultas(self,pac):
         # O objetivo da função é retornar o número de consultas que um paciente já realizou ou irá realizar com um determinado médico
-        con=Paciente.get_exame(pac) # Armazena a lista de exames de um paciente em uma variável local
-        search=0 # Contador
-        found=[] # Lista para dos exames que pertencem ao médico em questão, feito para printar a lista de todos os exames
-        while True:
-            if search in con:
-                found.append(con[search])
-                con.pop(search)
+        print(f"\n{Paciente.get_exame(pac)}\n")
+        con=list(Paciente.get_exame(pac)) # Armazena a lista de exames de um paciente em uma variável local
+        search=i=0
+        for i in range(pac.get_registro()):
+            if self.nome in con[i]:
+                # [[tipo_consulta1,data1,medico1],[tipo_consulta2,data2,medico2],[tipo_consulta3,data3,medico3]...]
+                search+=1
+                i+=1
             else:
-                if search==(len(con)+1):
-                    break
-                else:
-                    search+=1
-        print(f"Consultas marcadas com o paciente {Paciente.get_nome(pac)}: {search-1}")
-        i=0
-        while i < len(found):
-            print("Tipo de exame:",found[i][0])
-            print("\nData do exame:",found[i][1])
-            i+=1
+                continue
+        return f"Consultas marcadas com o paciente {Paciente.get_nome(pac)}: {search}"
 
     def registra_paciente(self):
         while True:
@@ -252,16 +248,16 @@ class Medico(Paciente):
             if len(end)==0:
                 print("Endereço inválido")
                 continue
-            presenha=[]
+            presenha=[] # Armazena os números randômicos como elementos de uma lista
             for i in range(6):
                 if i==6:
                     break
                 a=random.randint(0,9)
                 presenha.append(a)
                 i+=1
-                conversor = [str(presenha) for presenha in presenha]
-                converter = "".join(conversor)
-                senha = int(converter)
+                conversor = [str(presenha) for presenha in presenha] # Converter lista de int para lista str
+                converter = "".join(conversor) # Lista de str em uma única str
+                senha = int(converter) # Converte a str para int
             print(f"Informe a seguinte senha para o seu paciente e peça-o para guardar-la com segurança\nSenha: {senha}")
             return Paciente(cpf,senha,name,end)
 
@@ -272,7 +268,7 @@ if __name__ == "__main__":
     m1=Medico(45678,122456,"Carlos Almeida","Pediatra")
     while True:
         print("Bem-vindo ao sistema do Hospital Público de Brasília\nDigite [0] em qualquer um dos menus para encerrar a sessão\n")
-        inicio=int(input("Você é um:\n[1]Paciente\n[2]Médico\n"))
+        inicio=int(input("Você é um:\n[1] - Paciente\n[2] - Médico\n"))
         if inicio==1:
             login=Paciente.Login(p1)
             while login==True:
@@ -301,7 +297,7 @@ if __name__ == "__main__":
             while login==True:
                 menu=int(input("Selecione uma das opções:\n[1] - Ver consultas com um determinado paciente\n[2] - Marcar exame\n[3] - Cadastrar paciente\n[0] - Fazer logout\n"))
                 if menu==1:
-                    m1.num_consultas(p1)
+                    print(m1.num_consultas(p1))
                 elif menu==2:
                     print(f"Agendando exame para {p1.get_nome()}\n")
                     p1.marcar_exame()
