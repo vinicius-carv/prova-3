@@ -25,7 +25,7 @@ from mysql.connector import connect, Error
 
 def cria_conexao():
     conexao = mysql.connector.connect(user='root',
-                                      password='SUASENHA',
+                                      password='suasenha',
                                       host='127.0.0.1',
                                       database="db_farmacia")
 
@@ -98,7 +98,7 @@ def apagar_dado(cod):
     conexao.commit()
 
 if __name__ == "__main__":
-    #conexao = mysql.connector.connect(user='root',password='arthur159357',host='127.0.0.1',database="")
+    #conexao = mysql.connector.connect(user='root',password='suasenha',host='127.0.0.1',database="")
     conexao = cria_conexao()
     cursor = conexao.cursor()
     cria_banco()
